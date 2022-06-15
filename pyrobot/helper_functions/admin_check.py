@@ -24,7 +24,4 @@ async def admin_check(message: Message) -> bool:
     check_status = await client.get_chat_member(chat_id=chat_id, user_id=user_id)
     admin_strings = ["creator", "administrator"]
     # https://git.colinshark.de/PyroBot/PyroBot/src/branch/master/pyrobot/modules/admin.py#L69
-    if check_status.status not in admin_strings:
-        return False
-    else:
-        return True
+    return check_status.status in admin_strings

@@ -21,10 +21,10 @@ async def clear_filter(client: PyroBot, message):
 async def list_filters(client: PyroBot, message):
     status_message = await message.reply_text("checking 🤔🙄🙄", quote=True)
     flt_list = client.filterstore.get(str(message.chat.id), [])
-    msg = "<b>Filters in {}:</b>\n".format("the current chat")
+    msg = f"<b>Filters in the current chat:</b>\n"
     msg_p = msg
     for flt in flt_list:
-        flt_name = " - <code>{}</code>\n".format(flt)
+        flt_name = f" - <code>{flt}</code>\n"
         if len(msg) + len(flt_name) > MAX_MESSAGE_LENGTH:
             await message.reply_text(msg)
             msg = ""
