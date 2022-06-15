@@ -37,9 +37,7 @@ async def get_note_with_command(message, note_name):
             caption = caption.html
         if not caption:
             caption = ""
-        disable_web_page_preview = True
-        if "gra.ph" in caption or "youtu" in caption:
-            disable_web_page_preview = False
+        disable_web_page_preview = "gra.ph" not in caption and "youtu" not in caption
         await n_m.reply_text(
             text=caption,
             disable_web_page_preview=disable_web_page_preview,

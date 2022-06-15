@@ -51,9 +51,7 @@ async def who_is(client: Client, message: Message):
             message_out_str += "<b>Joined on:</b> <code>" f"{joined_date}" "</code>\n"
         except UserNotParticipant:
             pass
-    chat_photo = from_user.photo
-
-    if chat_photo:
+    if chat_photo := from_user.photo:
         local_user_photo = await client.download_media(message=chat_photo.big_file_id)
         await message.reply_photo(
             photo=local_user_photo,

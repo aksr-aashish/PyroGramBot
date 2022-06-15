@@ -23,7 +23,7 @@ async def check_flood(client, message):
     #
     if not CHAT_FLOOD:
         return
-    if not str(message.chat.id) in CHAT_FLOOD:
+    if str(message.chat.id) not in CHAT_FLOOD:
         return
     # copy @chathelp_bot bio here -_-
     if not message.from_user:
@@ -37,13 +37,9 @@ async def check_flood(client, message):
         )
     except Exception as e:  # pylint:disable=C0103,W0703
         no_admin_privilege_message = await message.reply_text(
-            text=(
-                "<b>Automatic AntiFlooder</b>\n"
-                "@admin <a href='tg://user?id={}'>{}</a> "
-                "is flooding this chat.\n\n"
-                "<code>{}</code>"
-            ).format(message.from_user.id, message.from_user.first_name, str(e))
+            text=f"<b>Automatic AntiFlooder</b>\n@admin <a href='tg://user?id={message.from_user.id}'>{message.from_user.first_name}</a> is flooding this chat.\n\n<code>{str(e)}</code>"
         )
+
         await asyncio.sleep(10)
         await no_admin_privilege_message.edit_text(
             text="https://t.me/c/1092696260/724970", disable_web_page_preview=True
@@ -51,13 +47,7 @@ async def check_flood(client, message):
     else:
         await client.send_message(
             chat_id=message.chat.id,
-            text=(
-                "<b>Automatic AntiFlooder</b>\n"
-                "<a href='tg://user?id={}'>{}</a> "
-                "has been automatically restricted "
-                "because he reached the defined flood limit. \n\n"
-                "#FLOOD".format(message.from_user.id, message.from_user.first_name)
-            ),
+            text=f"<b>Automatic AntiFlooder</b>\n<a href='tg://user?id={message.from_user.id}'>{message.from_user.first_name}</a> has been automatically restricted because he reached the defined flood limit. \n\n#FLOOD",
             reply_to_message_id=message.message_id,
         )
 
@@ -72,8 +62,9 @@ async def set_flood(_, message):
         global CHAT_FLOOD
         CHAT_FLOOD = sql.__load_flood_settings()
         await message.reply_text(
-            "Antiflood updated to {} in the current chat".format(input_str)
+            f"Antiflood updated to {input_str} in the current chat"
         )
+
     except Exception as e:  # pylint:disable=C0103,W0703
         await message.reply_text(str(e))
 
