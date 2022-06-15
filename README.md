@@ -10,7 +10,8 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 
 #### The Easy Way
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)]([https://heroku.com/deploy](https://github.com/aksr-aashish/PyroGramBot))
+<p align="center"><a href="https://heroku.com/deploy?template=https://github.com/aksr-aashish/PyroGramBot"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-blue?style=for-the-badge&logo=heroku" width="220" height="38.45"/></a></p>
+<p align="center">
 
 
 ## ENVironment VARiables
